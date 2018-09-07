@@ -4,6 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import AMap from 'vue-amap';
+import Carousel3d from 'vue-carousel-3d';
+import hljs from 'highlight.js'
+import 'highlight.js/styles/googlecode.css' //样式文件
+Vue.use(Carousel3d);
 Vue.use(AMap);
 Vue.config.productionTip = false
 AMap.initAMapApiLoader({
@@ -12,6 +16,13 @@ AMap.initAMapApiLoader({
     // 插件集合
     plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType']
 });
+
+Vue.directive('highlight',function (el) {
+  let blocks = el.querySelectorAll('pre code');
+  blocks.forEach((block)=>{
+    hljs.highlightBlock(block)
+  })
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -13,13 +13,13 @@
 
    		<div class="newList Warper bb">
    			<ul class="">
-   				<li @click='toDeali(d)' v-for='(i,d) in 10'>
+   				<li  @click='toDeali(i.id)' v-for='(i,d) in newList'>
    					<div class="imgBox">
-   						<img src="/static/img/pic6.png" alt="">
-   						<span>2018-03-02</span>
+   						<img :src="i.cover_src ? i.cover_src : '/mob/img/M_pic6.png'" alt="">
+   						<span>{{i.created_at ? i.created_at: ''}}</span>
    					</div>
 
-   					<p class="title">如何扩展以太坊：分片原理解释</p>
+   					<p class="title">{{i.title ? i.title : ''}}</p>
    					<button>阅读文章</button>
    				</li>
    			</ul>
@@ -28,14 +28,17 @@
    				<div v-if='crrPage == 1' class="Left bb grey">← 上一页 </div>
    				<div @click='changePage(0)' v-if='crrPage != 1'  class="Left bb white">← 上一页 </div>
 
-   				<div v-if='crrPage == totalPage-1' class="Right bb grey">下一页  →</div>
-   				<div @click='changePage(1)' v-if='crrPage != totalPage-1' class="Right bb white">下一页  →</div>
+   				<div v-if='crrPage == totalPage' class="Right bb grey">下一页  →</div>
+   				<div @click='changePage(1)' v-if='crrPage != totalPage' class="Right bb white">下一页  →</div>
 
    				
    			</div>
 
    		</div>
 
+   		<footer class="Warper center">
+   				<p> ©2014成都子奇科技有限公司 蜀ICP备13026114号-7</p>	
+   		</footer>	
 
 	</div>
 
@@ -43,12 +46,13 @@
 
 <script >
 	import Header from '../components/header'
-
+	import axios from 'axios'
 	export default{
 		data(){
 			return({
 				totalPage:5,
-				crrPage:1
+				crrPage:1,
+				newList:[]
 			})
 		},
 		methods:{
@@ -57,16 +61,39 @@
 			},
 			changePage(type){
 				if(type == 0){
-					if(this.crrPage > 0){
+					if(this.crrPage > 1){
 						this.crrPage -- 	
+						axios.get(`${href}/api/post?&page=${this.crrPage}&limit=6`)
+							.then(r=>{
+								this.newList = r.data.list
+								this.totalPage = Math.ceil(r.data.count/6)
+								this.crrPage = r.data.current
+							})
 					}
 				}else if(type == 1){
-					if(this.crrPage > 0 && this.crrPage < this.totalPage){
+					if(this.crrPage >= 1 && this.crrPage < this.totalPage){
 						this.crrPage ++ 	
+						axios.get(`${href}/api/post?&page=${this.crrPage}&limit=6`)
+							.then(r=>{
+								this.newList = r.data.list
+								this.totalPage =  Math.ceil(r.data.count/6)
+								this.crrPage = r.data.current
+							})
 					}
 				}
+				 document.documentElement.scrollTop  = 0
+		         document.body.scrollTop  = 0
+		         window.pageYOffset = 0
 			}
 		},
+		mounted(){
+			axios.get(`${href}/api/post?&page=1&limit=6`)
+				.then(r=>{
+					this.newList = r.data.list
+					this.totalPage = Math.ceil(r.data.count/6)
+					this.crrPage = r.data.current
+				})
+		},	
 		components:{
 			Header
 		}
@@ -77,7 +104,7 @@
 	.Warper{
 		.TopBack{
 			height: 96.36vw;
-			background-image: url('/static/img/indexbg.png');
+			background-image: url('/mob/img/M_indexbg.png');
 			background-repeat: no-repeat;
 			background-position: center center;
 			background-size: 100% 100%;
@@ -86,7 +113,7 @@
 				>.shadowText{
 					position: relative;
 					text-align: center;
-					margin-top:36vw; 
+					margin-top:26vw; 
 					margin-bottom: 10.66vw;
 					color: #000;
 					margin-bottom: 2vw;
@@ -120,7 +147,7 @@
 			width: 100%;
 			padding: 0 3.46vw;
 			>ul{
-				transform: translateY(-32vw);
+				transform: translateY(-35vw);
 				width: 100%;
 				>li{
 					width: 100%;
@@ -177,10 +204,10 @@
 				}
 			}
 			>.changepage{
+				transform: translateY(-22vw);
 				.Left{
 					width: 48%;
 					height: 10.66vw;
-					background-color: red;
 					border-radius: 10vw;
 					line-height: 10.66vw;
 					padding-left: 5.33vw;
@@ -189,7 +216,6 @@
 				>.Right{
 					width: 48%;
 					height: 10.66vw;
-					background-color: red;
 					border-radius: 10vw;
 					line-height: 10.66vw;
 					text-align: right;
@@ -203,6 +229,13 @@
 					line-height: 10.66vw;
 				}
 			}
+		}
+		footer{
+			background-color: #0D0F26;
+			height: 19.6vw;
+			color: #8d8f98;
+			line-height: 0;
+			font-size: 3.2vw;
 		}
 	}
 </style>

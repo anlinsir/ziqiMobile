@@ -1,6 +1,47 @@
 <template>
   <div class="Warper">
    	<Header />
+
+   	<div v-for="(ii,id) in zhezhao" @click.self='zhezhaoShow = false;redW = false;bigImg = null ;zhezhao = []' v-show='zhezhaoShow' :style="{width:'100%',height:'100%'}" class="zhezhao">
+   		<div class="indezs">
+   			<div class="tops">
+   				<dl class="flex">
+   					<dt><img src="/mob/img/M_indexlogo.png" alt=""></dt>
+   					<dd>
+   						<p style='font-size:4.5vw;color:#000;' class="fwb">{{ii.name ? ii.name : '' }} </p>
+   						<p style="font-size:4vw;color:#626262;">{{ii.tiny_info}}</p>
+   					</dd>
+   				</dl>
+   			</div>
+
+   			<div class="bigImg">
+   				<img :src="bigImg ?  bigImg : ii.images[0]" >
+   			</div>
+
+   			<div class="smaimgs">
+   				<img @click='bigImg = i' v-for="(i,d) in ii.images" :src="i" alt="">
+   			</div>
+
+   			<div class="btngro white bb flexB">
+   				<button @click=" redW = !redW;" style="color:#fff;z-index: 2;">APP下载</button>
+   				<button :style="{width:redW ? '55.466vw' : '42%',left:redW ? '30.2vw' : '4.2vw'}" class="reds">
+   					<span @click='and(ii.android_app)' class="and lh">
+   						<img src="/mob/img/M_andriod.png">
+   					</span>
+   					<span @click='ios(ii.ios_app)' class="ios lh">
+   						<img src="/mob/img/M_ios.png">
+   					</span>
+   					<span @click="redW = false" class="close lh">
+   						<img src="/mob/img/M_CLOSEr.png">
+   					</span>
+   				</button>
+   				<button v-show='!redW' style="border:1px solid rgba(229,229,229,1); color:rgba(136,135,135,1); background:rgba(255,255,255,1);box-shadow:none;z-index:0;">
+   					<a :href="ii.website" target='_blank' >官网链接</a>
+   				</button>
+   			</div>
+   		</div>
+   	</div>
+
    	<div class="TopBack Warper bb ">
    		<div class="topback">
    			<div class="centerText">
@@ -14,9 +55,30 @@
    	</div>
 
 
-   	<div class="section1 bb Warper">
+   	<div id='sec1' class="section1 bb Warper">
    		<div class="sec1">
-   			<ul class="">
+   			<carousel-3d style="width: 100vw;height: 102.53vw;text-align:center;">
+			    <slide style="width: 75.73vw;
+							height: 102.53vw;
+							background-color: rgba(45,47,93,0.8);
+							left: 10vw;
+							border:none;
+							border-radius:1.33vw;
+							    " v-for="(slide, i) in silderList" :index="i" :key="i">
+			        <div class="shadowText" style="position: relative;text-align: center;margin-top:5.73vw; ">
+   						<div class="back" style="position: absolute;z-index: 1;top:-3vw;left: 0;right: 0;margin: auto;font-size: 8vw;color: rgba(255,255,255,0.1);">{{slide.back}}</div>
+   						<div class="forword fwb" style="font-size: 5.3vw;">{{slide.back}}</div>
+   					</div>
+   					<p class="exp white center" style="margin-top: 3vw;	font-size: 3.73vw;margin-bottom: 8vw;">{{slide.exm}}</p>
+   					<div class="img" style="height: 39.93vw;" :style="{backgroundPosition: slide.imgp}"></div>
+   					<div class="content centr" style="padding: 0 8vw;color: #fff;">
+   						<p class="title fwb" style="font-size: 4.5vw;margin-bottom: 4vw;">{{slide.title}}</p>
+   						<p class="diri" style="font-size: 3.73vw;">{{slide.dir}}</p>
+   					</div>
+			    </slide>
+			</carousel-3d>
+   			<!-- <ul class="">
+
    				<li>
    					<div class="shadowText">
    						<div class="back">服务技术</div>
@@ -31,7 +93,7 @@
    				</li>
    				
 
-   			</ul>
+   			</ul> -->
    			 <!-- <swiper class='swiper' :options="swiperOption">
 		      <swiper-slide v-for="(item, index) in ['根链平台及以太坊智能合约','根链平台及以太坊智能合约s','根链平台及以太坊智能合约6']" :key="index">
 		      	<p>{{item}}</p>
@@ -40,7 +102,7 @@
 		</div>
 	</div>
 	<!-- sec1 -->
-	<div class="section2 bb Warper">
+	<div id='sec2' class="section2 bb Warper">
    		<div class="sec2 ">
    			<div class="shadowText">
 				<div class="back">业务内容</div>
@@ -89,57 +151,69 @@
 		</div>
 	</div>
 	<!-- sec2 -->
-	<div class="section3 bb  Warper">
+	<div id='sec3' class="section3 bb  Warper">
 		<div class="sec3  ">
    			<div class="shadowText">
 				<div class="back">案例展示</div>
 				<div class="forword fwb">案例展示</div>
 			</div>
 			<div class="switchWarp">
-				<div class="switch">
-					<div class="hover">
-						<div class="bottom white">
-							<p class="title">搜多多SOUDUODUO</p>
-							<p class="dirc">数字资产行情</p>
-							<img src="/static/img/button.png" >
+				<div class="swiper-container" style="padding-right:5vw;">
+				    <div class="swiper-wrapper">
+				     <div :style="{backgroundImage:`url(${ii.images[0]})`,}"  style="    background-size: 100% 100%;width:48vw;" v-for="(ii,id) in anliList" @click='some = id;zhezhaoShow = true;zhezhao = [anliList[some]];bigImg = anliList[some].images[0]' class="switch swiper-slide">
+  							<div class="hover">
+  								<div class="bottom white">
+  									<p class="title">{{ii.name ? ii.name : ''}}</p>
+  									<p class="dirc">{{ii.tiny_info}}</p>
+  									<img src="/mob/img/M_button.png" >
+  								</div>
+							</div>
+
+                <!-- <div   v-for="(ii,id) in anliList.length " class="switch swiper-slide">
+                  <div class="hover">
+                    <div class="bottom white">
+                      <p class="title">dsds</p>
+                      <p class="dirc">dsds</p>
+                      <img src="/mob/img/M_button.png" >
+                    </div>
+                </div> -->
 						</div>
-					</div>
+				    </div>
+				    <!-- 如果需要分页器 -->
+				    <div style="width: 90vw;" class="swiper-pagination"></div>
+				    
+				   
 				</div>
+
+				
 			</div>
 		</div>
 	</div>
 	<!-- sec3 -->
 
-	<div class="section4 bb   Warper">
+	<div id='sec4' class="section4 bb   Warper">
 		<div class="sec4  ">
 			<div class="shadowText">
 				<div class="back">最新资讯</div>
 				<div class="forword fwb">最新资讯</div>
 			</div>
 			<ul>
-				<li class="bb white">
-					<p class="title fwb">如何扩展以太坊：分片原理解释</p>
+
+				<li v-for="(ii,id) in newList" class="bb white">
+					<p class="title fwb">{{ii.title}}</p>
 					<p class="content">
-						<span>首先让我们看看分片系统的结构。首先，在特定分片上被称为校对器（Collator）的节点的任务是创建校对块（Collation），校对块是一种包含关于所涉及分片的重要信息的特定结构。 </span><br>
-						<span>超级节点将把所有分片中的校对块放到以太坊区块链中将要添加的区块中。通过汇总他们的校验头来维护所有分片的状态。</span>
+						<span v-html="ii.tiny_content"></span><br>
 					</p>
-					<p class="seeMore">阅读全文 ></p>
+					<p @click='todetali(ii.id)' class="seeMore">阅读全文 ></p>
 				</li>
-				<li class="bb white">
-					<p class="title fwb">智能合约灵活升级</p>
-					<p class="content">
-						<span>以太坊智能合约具有很强的不变性，使得我们能够构建完全防篡改的应用程序，任何个人、公司或政府都不能篡改数据（信息）。每个参与者都遵循相同的规则，并且这些规则永远都不会改变 </span><br>
-						<span>但是，说到底，这些规则都是由人创造的。而人类总是偶然会犯一点错误的。我们不可能从第一天就看到未来发展的完整画面，并构造一个完全不需要适配或改进的完美系统。</span>
-					</p>
-					<p class="seeMore">阅读全文 ></p>
-				</li>
+				
 			</ul>
-			<button >更多资讯</button>
+			<button @click='toNews'>更多资讯</button>
 		</div>	
 	</div>
 	<!-- sec4 -->
 
-	<div class="section5 bb   Warper">
+	<div id='sec5' class="section5 bb   Warper">
 		<div class="sec5  ">
 			<div class="shadowText">
 				<div class="back">公司信息</div>
@@ -156,21 +230,47 @@
 				<li @click='active = id ' :class="active == id ? 'active' : '' " v-for="(ii,id) in ['中国','瑞典','日本']">{{ii}}</li>
 			</ul>
 
-			<div class="detali">
+			<div class="detali" v-show='active == 0'>
 				<p style="font-size:4vw;margin-bottom:11.2vw;"><strong>成都子奇科技有限公司 总部</strong></p>
 				<p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:11.2vw;">地址: 四川成都市高新区天府大道天华路天府软件园B区3栋4F-V06</p>
 				<p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:4vw;">电话: 400-0288-767；18508233623</p>
 				<p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:4vw;">Q Q: 1834633402</p>
 				<p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:4vw;">邮箱: shxiao918@gmail.com</p>
 			</div>
+
+      <div class="detali" v-show='active == 1'>
+        <p style="font-size:4vw;margin-bottom:11.2vw;"><strong>成都子奇科技有限公司瑞典办事处</strong></p>
+        <p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:11.2vw;">地址: Emmylundsvägen 1, 17172, Stockholm, Sweden</p>
+        <p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:4vw;">电话: 400-0288-767</p>
+        <p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:4vw;">手机: +0046-0760706468</p>
+        <p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:4vw;">邮箱: sikewan1993@gmail.com</p>
+      </div>
+
+      <div class="detali" v-show='active == 2'>
+        <p style="font-size:4vw;margin-bottom:11.2vw;"><strong>成都子奇科技有限公司日本办事处</strong></p>
+        <p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:11.2vw;">地址: 〒東京都豊島区池袋4-32-10ミニービル</p>
+        <p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:4vw;">电话: 400-0288-767</p>
+        <p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:4vw;">手机: +080-45788999</p>
+        <p style="font-size:4vw;color:rgba(77,77,77,1);margin-bottom:4vw;">邮箱: enbobobo@gmail.com</p>
+      </div>
+
+
+
 			<div class="map">
-				<div id="container" style="width:100%; height:100%"></div>
+				<div  v-show='active == 0'  id="container" style="width:100%; height:100%"></div>
+        <div  v-show='active == 1'  style="width:100%; height:100%">
+          <img style="width:100%; height:100%" src="/mob/img/M_google_swe.png" alt="">
+        </div>
+        <div  v-show='active == 2'  style="width:100%; height:100%">
+          <img style="width:100%; height:100%" src="/mob/img/M_google_jp.png" alt="">
+        </div>
+
 			</div>
 
 	    </div>
 	</div>
 	<!-- sec5 -->
-	<div class="section6 bb   Warper">
+	<div id='footer' class="section6 bb   Warper">
 		<div class="sec6  ">
 			<div class="shadowText">
 				<div class="back">业务咨询</div>
@@ -178,19 +278,19 @@
 			</div>
 			<p class="exp center">填写以下内容发送给我们我们将在<br>24小时内联系您</p>
 			<form>
-				<input type="text"  placeholder="成都某某某科技有限公公司">
-				<input type="text"  placeholder="您的姓名(必填)">
-				<input type="text"  placeholder="联系电话(必填)">
-				<input type="text"  placeholder="微信号(必填)">
-				<input type="text"  placeholder="标题">
-				<textarea placeholder="咨询内容……"></textarea>
-				<button>发 送</button>
+				<input type="text"  v-model="company_name"   placeholder='公司名称'>
+				<input type="text"  v-model="name"   placeholder="您的姓名(必填)">
+				<input type="text"  v-model="tel"  placeholder="联系电话(必填)">
+				<input type="text"  v-model="email"  placeholder="微信号(必填)">
+				<input type="text"  v-model="title"  placeholder="标题">
+				<textarea placeholder="咨询内容……" v-model="content" ></textarea>
+				<button @click.prevent='sed'>发 送</button>
 			</form>
 		</div>
 	</div>
 	<!-- sec5 -->
 
-	<footer class="section7 bb   Warper">
+	<footer id='' class="section7 bb   Warper">
 		<div class="sec7">
 			<div class="shadowText">
 				<div class="back">合作伙伴</div>
@@ -199,12 +299,14 @@
 			<p class="exp center">优质的合作资源</p>
 			<div class="imgs">
 				<div class="top center">
-					<img src="/static/img/footerLogo.png"><br>
-					<img src="/static/img/CLOSEr.png" class="close">
+					<img src="/mob/img/M_footerLogo.png"><br>
+					<img src="/mob/img/M_CLOSEr.png" class="close">
 				</div>
 
 				<ul class="others flexB">
-					<li :style="{backgroundPosition:ii.imp}" v-for="(ii,id) in [{imp:'0px 0px'},{imp:'-176px 0px'},{imp:'-0px -70px'},{imp:'-176px -70px'},{imp:'-356px 0px'},{imp:'-532px 0px'},{imp:'-356px -70px'},{imp:'-532px -70px'},]"></li>
+					<li :style="{backgroundPosition:ii.imp}" v-for="(ii,id) in [{imp:'0.8vw 0px',href:'https://www.okcoin.com/'},{imp:'-38.4vw 0.4vw',href:'https://soduoduo.com'},{imp:' 0.4vw -15.533vw',href:'https://www.8btc.com/'},{imp:'-39.133vw -15.133vw',href:'https://www.aliyun.com'},{imp:'1vw -32.53vw',href:'https://www.jinse.com/'},{imp:'-39.4vw -33vw',href:'https://www.hbg.com/zh-cn/'},{imp:'-0vw -51vw',href:'https://aws.amazon.com/cn/?nc2=h_lg'},{imp:'-40vw -52vw',href:'http://www.linkedin.com/company/kybernetwork/'},]">
+              <a :href="ii.href" target='_blank' :title="ii.href"></a>     
+          </li>
 				</ul>
 			</div>
 			<p class="over white center"> © 2014 成都子奇科技有限公司 蜀ICP备13026114号-7</p>
@@ -219,22 +321,223 @@
 	import Header from '../components/header'
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	import { lazyAMapApiLoaderInstance } from 'vue-amap';
-
+	import { Carousel3d, Slide } from 'vue-carousel-3d';
+	import axios from 'axios'
 export default {
   data () {
     return {
       active:0,
       swiperOption: {
 			loopFillGroupWithBlank: true,//在loop模式下，为group填充空白slide  
-        }
+        },
+        fullseroll:[],
+        redW:false,
+        zhezhaoShow:false,
+        silderList:[
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-23px 2644px',
+        		title:'根链平台及以太坊智能合约',
+        		dir:'实施智能合约以让合约在根链平台及以太坊自动执行。我们可以从定义开始为您撰写智能合约代码'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-416px 2644px',
+        		title:'区块链技术',
+        		dir:'使用基于密码的技术来储存不可变数据。我们可以帮助您选择适合此技术的程序。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-32px 2171px',
+        		title:'智能合约审计',
+        		dir:'在您将智能合同部署到区块链时，安全缺陷、不当行为和效率低下会带来高昂的代价。我们帮助公司写出可靠的智能合约代码。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-427px 2171px',
+        		title:'超级账本',
+        		dir:'金融、保健、零售、制造等区块链发展。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-37px 1693px',
+        		title:'私人区块链',
+        		dir:'在您的机构或公司实施私人区块链。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-418px 1693px',
+        		title:'货币兑换',
+        		dir:'开发安全可靠的加密货币兑换。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-32px 1210px',
+        		title:'付款网关',
+        		dir:'接受加密货币并即时将之转换为您的优选货币或将之存至您的钱包。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-419px 1207px',
+        		title:'钱包',
+        		dir:'保护传统钱包和多重签名钱包以确保安全。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-27px 749px',
+        		title:'履约保证',
+        		dir:'在满足特定条件时释放加密货币付款。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-408px 735px',
+        		title:'众筹',
+        		dir:'允许个人和组织接受全世界对其项目的投入或投资。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-35px 256px',
+        		title:'训练',
+        		dir:'教您的团队理解区块链技术并为接下来的动作作准备。'
+        	},
+        	{
+        		back:'服务技术',
+        		forword:'服务技术',
+        		exm:'时代前沿的区块链技术服务内容',
+        		imgp:'-415px 247px',
+        		title:'匿名化',
+        		dir:'使用额外匿名化措施，如混币，以保障隐私。'
+        	},
+
+        ],
+        company_name:'',
+		name:'',
+		tel:'',
+		email:'',
+		title:'',
+		content:'',
+		anliList:[],
+		some:0,
+		bigImg:'',
+    zhezhao:[],
+    newList:[]
     }
   },
+  computed:{
+   
+  },
+   methods:{
+    todetali(d){
+      this.$router.push(`/newsDetali/${d}`)
+    },
+    toNews(){
+      this.$router.push('/news')
+    },
+   		and(href){
+   			window.open(href)
+   		},
+   		ios(href){
+   			window.open(href)
+   		},
+   		sed(){
+   			if(!this.name || !this.tel || !this.email){
+   				alert('请保证必填项已完成')
+   				return
+   			}	
+   			var pro = {
+   				company_name:this.company_name,
+   				name:this.name,
+   				tel:this.tel,
+   				email:this.email,
+   				title:this.title,
+   				content:this.content,
+
+   			}
+   			axios.post(`${href}/api/msg`,pro)
+   				.then(r=>{
+   					alert(r.data.msg)
+   					this.company_name = ''
+					this.name = ''
+					this.tel = ''
+					this.email = ''
+					this.title = ''
+					this.content = ''
+   				})
+
+   		}
+   },
   components:{
   	Header,
   	swiper,
-  	swiperSlide
+  	swiperSlide,
+  	Carousel3d,
+    Slide
   },
   mounted(){
+
+
+    axios.get(`${href}/api/post?&page=1&limit=2`)
+        .then(r=>{
+          this.newList = r.data.list
+        })
+
+  		axios.get(`${href}/api/project?&page=1&limit=10`)
+  			.then(r=>{
+  				this.anliList = r.data.list
+          this.zhezhao = [this.anliList[this.some]]
+  			})
+
+
+  		 setTimeout(()=>{
+          var mySwiper = new Swiper ('.swiper-container', {
+          // direction: 'vertical',
+          // 如果需要分页器
+            width:360,
+            spaceBetween : 30,
+             pagination: {
+                el: '.swiper-pagination',
+                clickable :true,
+                renderBullet: function (index, className) {
+                    return '<span style=transform: translateX(-26vw);" class="' + className + ' white  "></span>';
+                  },
+
+            },
+          
+        
+        }) 
+        },2000)   
+
+
+
+  		setTimeout(()=>{
+  			this.fullseroll[0] = document.documentElement.clientWidth
+  			this.fullseroll[1] = document.documentElement.clientHeight
+  		},1000)
+
+
+
   		lazyAMapApiLoaderInstance.load().then(() => {
 	        this.map = new AMap.Map('container', {
 	        	center: new AMap.LngLat(104.0701200000,30.5445100000),
@@ -260,10 +563,130 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.swiper-container {
+    width: 600px;
+    height: 300px;
+}  
 	.Warper{
+		.zhezhao{
+			position: fixed;
+			top:0;
+			background-color: rgba(0,0,0,0.4);
+			z-index: 9;
+			overflow: auto;
+			>.indezs{
+				width: 90%;
+				margin: auto;
+				margin-top: 20vw;
+				border-radius: 1.73vw;
+				background-color: #fff;
+				height: 141.866vw;
+				>.tops{
+					width: 100%;
+					height: 21.466vw;
+					>dl{
+						padding: 4.4vw 0 0 4.4vw;
+						>dt{
+							margin-right: 4vw;
+							width: 10vw;
+							height: 10vw;
+							>img{
+								width: 10vw;
+								height: 10vw;
+							}
+						}
+					}
+				}
+				>.bigImg{
+					width: 100%;
+					height: 68.233vw;
+					>img{
+						width: 100%;
+						height: 100%;
+					}
+				}
+				>.smaimgs{
+					margin-top: 8vw;
+					width: 100%;
+					overflow: hidden;
+					height: 14.666vw;
+					padding-left: 0vw;
+					margin-bottom: 9.46vw;
+					>img{
+						float: left;
+						width: 21.333vw;
+						height: 14.666vw;
+						margin-left: 3vw;
+
+					}
+
+				}
+				>.btngro{
+
+					width: 100%;
+					padding: 0 4vw;
+					position: relative;
+					>button{
+						transition:all 2s;
+						width:47%;
+						font-size: 3.666vw;
+						height:11.46vw;
+						background:linear-gradient(112deg,rgba(48,157,180,1),rgba(109,235,209,1));
+						border-radius:5.73vw;
+						box-shadow:0px 0.933vw 2.8vw 0px rgba(117,219,199,0.27);	
+						position: relative;
+						
+					}
+					>.reds{
+						width:55.466vw;
+						background: red ;	
+						position: absolute;
+						transition:all 1s;
+						z-index: 1;
+						left: 4.2vw;
+						box-shadow: none;
+						background:rgba(255,255,255,1);
+						border:1px solid rgba(229,229,229,1);
+						>.and{
+							width: 6vw;
+							height: 7.5vw;
+							margin-right: 5vw;
+							>img{
+								width: 100%;
+								height: 100%;
+
+							}
+						}
+						>.ios{
+							width: 6vw;
+							height: 7.5vw;
+							>img{
+								width: 100%;
+								height: 100%;
+							}
+						}
+						>.close{
+							width: 8.5vw;
+							height: 8.5vw;
+							right: 3vw;
+							top:1vw;
+							border-radius: 50%;
+							border:1px solid rgba(229,229,229,1);
+							position: absolute;
+							>img{
+								border-radius: 50%;
+								width: 73%;
+								transform: translateY(1.2vw) translateX(0.2vw);
+								height: 70%;
+							}
+						}
+					}
+				}
+			}
+		}
 		.TopBack{
 			height: 96.36vw;
-			background-image: url('/static/img/indexbg.png');
+			background-image: url('/mob/img/M_indexbg.png'),-webkit-linear-gradient(left, #1e224f,#3e3076);
 			background-repeat: no-repeat;
 			background-position: center center;
 			background-size: 100% 100%;
@@ -290,8 +713,9 @@ export default {
 				.sec1{
 					width: 100%;
 					position: absolute;
-					top:-34vw;
+					top:-42vw;
 					overflow: hidden;
+					
 					>ul{
 						width: 1000%;
 						padding-left: 12.66vw;
@@ -436,21 +860,24 @@ export default {
 						color:rgba(51,51,51,1);
 					}
 				}
-				>.switchWarp{
+				.switchWarp{
 					padding: 0 4vw;
-					>.switch{
+					overflow: hidden;
+					.switch{
 						position: relative;
+						    // width: 96vw;
+   								 margin-right: 30px;
 						width: 91.86vw;
 						height: 59.33vw;
 						border-radius:1.73vw;
 						box-shadow:0px 1vw 5.73vw 0px rgba(45,47,93,0.1);
-						background-image: url('/static/img/displayLi.png');
+						background-image: url('/mob/img/M_displayLi.png');
 						background-repeat: no-repeat;
 						background-position: center;
 						background-size: 130%;
 						>.hover{
 							position: absolute;
-							width: 91.86vw;
+							width: 100%;
 							height: 59.33vw;
 							border-radius:1.73vw;	
 							background:linear-gradient(0deg,rgba(47,41,99,1),rgba(24,24,24,0));
@@ -467,6 +894,8 @@ export default {
 									font-size: 3.2vw;
 								}
 								>img{
+									width: 	100%;
+									height: 	100%;
 									position: absolute;
 									right: 5.46vw;
 									top:0;
@@ -484,7 +913,7 @@ export default {
 		}
 		.section4{
 			height: 297.6vw;
-			background-image: url('/static/img/other.png');
+			background-image: url('/mob/img/M_other.png');
 			background-size: 100% 100%;
 			>.sec4{
 				height: 297.6vw;
@@ -777,9 +1206,14 @@ export default {
 							width: 31.06vw;
 							margin-bottom: 6.6vw;
 							height: 13.6vw;
-							background-image: url('/static/img/footerImgs.png');
-							background-size: 550%;
+							background-image: url('/mob/img/M_footerImgs.png');
+							background-size: 220%;
 							background-repeat: no-repeat;
+              >a{
+                display: inline-block;
+                width: 100%;
+                height:100%;
+              }
 
 							
 

@@ -26,6 +26,8 @@ html,body{
   width: 100%;
   overflow-x: hidden;
   height: 100%;
+  overflow:scroll;
+  
 }
 .color{
   --color: #fff;
@@ -92,7 +94,7 @@ html,body{
   font-weight: 400;
 }
 .img{
-  background-image: url('/static/img/server.png');
+  background-image: url('/static/img/M_server.png');
 }
 .box{
   border-radius: 50%;
@@ -101,6 +103,7 @@ html,body{
 
 ul li{
   list-style: none;
+  list-style-position: inside;
 }
 a{
   color: #000;
@@ -110,6 +113,7 @@ input , button , textarea{
   outline: none;
   background-color: #fff;
   border:none;
+  appearance: none;
 }
 
 
