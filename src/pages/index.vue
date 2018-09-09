@@ -57,9 +57,9 @@
 
    	<div id='sec1' class="section1 bb Warper">
    		<div class="sec1">
-   			<carousel-3d style="width: 100vw;height: 102.53vw;text-align:center;">
+   			<carousel-3d style="width: 100vw;height: 115vw;text-align:center;">
 			    <slide style="width: 75.73vw;
-							height: 102.53vw;
+							height: 115vw;
 							background-color: rgba(45,47,93,0.8);
 							left: 10vw;
 							border:none;
@@ -71,7 +71,7 @@
    					</div>
    					<p class="exp white center" style="margin-top: 3vw;	font-size: 3.73vw;margin-bottom: 8vw;">{{slide.exm}}</p>
    					<div class="img" style="height: 39.93vw;" :style="{backgroundPosition: slide.imgp}"></div>
-   					<div class="content centr" style="padding: 0 8vw;color: #fff;">
+   					<div class="content centr" style="padding: 0 8vw;color: #fff;    line-height: 6vw;">
    						<p class="title fwb" style="font-size: 4.5vw;margin-bottom: 4vw;">{{slide.title}}</p>
    						<p class="diri" style="font-size: 3.73vw;">{{slide.dir}}</p>
    					</div>
@@ -133,7 +133,7 @@
    						color:'#3D3075',
    						num:'04',
    						tit:'创新的区块链技术支持',
-   						dir:'全球A级项目投资策略及渠道提供'
+   						dir:'全球A级项目投资策略和渠道提供，提供全方位风控保障'
    					}
    				]">
    					<dt>
@@ -335,100 +335,112 @@ export default {
         zhezhaoShow:false,
         silderList:[
         	{
+            id:1,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-23px 2644px',
-        		title:'根链平台及以太坊智能合约',
-        		dir:'实施智能合约以让合约在根链平台及以太坊自动执行。我们可以从定义开始为您撰写智能合约代码'
+        		imgp:'-79px -60px',
+        		title:'数字资产',
+        		dir:'基于区块链平台提供票据的资产化数字能力（发行、转让、贴现、兑付等），可应用于数字票据、共享积分、优惠券、数字TOKEN、股权登记等业务场景'
         	},
         	{
+            id:2,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-416px 2644px',
-        		title:'区块链技术',
-        		dir:'使用基于密码的技术来储存不可变数据。我们可以帮助您选择适合此技术的程序。'
+        		imgp:'-454px -60px',
+        		title:'鉴证证明',
+        		dir:'基于超级账本(hyperledger)搭建区块链鉴证证明服务平台，可应用于知识产权、保单保全、公益捐赠、个人和企业资质证明等业务场景'
         	},
         	{
+            id:3,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-32px 2171px',
-        		title:'智能合约审计',
-        		dir:'在您将智能合同部署到区块链时，安全缺陷、不当行为和效率低下会带来高昂的代价。我们帮助公司写出可靠的智能合约代码。'
+        		imgp:'-87px -579px',
+        		title:'共享账本',
+        		dir:'基于超级账本(hyperledger)、以太坊（Ethereum）智能合约的编写，可应用于贸易款项交割、航空延误险、自行车租赁、房屋共享等合同自动执行的场景'
         	},
         	{
+            id:4,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-427px 2171px',
-        		title:'超级账本',
-        		dir:'金融、保健、零售、制造等区块链发展。'
+        		imgp:'-455px -591px',
+        		title:'智能合约',
+        		dir:'基于超级账本(hyperledger)、以太坊（Ethereum）智能合约的编写，可应用于贸易款项交割、航空延误险、自行车租赁、房屋共享等合同自动执行的场景'
         	},
         	{
+            id:5,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-37px 1693px',
-        		title:'私人区块链',
-        		dir:'在您的机构或公司实施私人区块链。'
+        		imgp:'-69px -1154px',
+        		title:'分享经济',
+        		dir:'基于超级账本(hyperledger)的区块链可信网络互助服务，可以为用户加入互助平台的真实性、用户身份认证真实性、互助事件发生的真实性等各个环节提供真实性证明'
         	},
         	{
+            id:6,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-418px 1693px',
-        		title:'货币兑换',
-        		dir:'开发安全可靠的加密货币兑换。'
+        		imgp:'-440px -1141px',
+        		title:'防伪溯源',
+        		dir:'区块链技术结合防伪标签和物联网设备，能够防止人为因素造成的数据源造假，确保产品信息真实唯一，可溯源，防篡改，实时监控审核商品身份、商品动态、商品流向'
         	},
         	{
+            id:7,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-32px 1210px',
-        		title:'付款网关',
-        		dir:'接受加密货币并即时将之转换为您的优选货币或将之存至您的钱包。'
+        		imgp:'-72px -1676px',
+        		title:'信息安全',
+        		dir:'提供弹性、易用、安全、智能的企业信息安全防御体系，从网络层，系统层，应用层，数据层和业务层进行全方位保障'
         	},
         	{
+            id:8,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-419px 1207px',
-        		title:'钱包',
-        		dir:'保护传统钱包和多重签名钱包以确保安全。'
+        		imgp:'-441px -1687px',
+        		title:'区块链游戏',
+        		dir:'基于以太坊（Ethereum）DAPP智能合约的区块链游戏，可应用于区块链菠菜类、站岗类、棋牌类、宠物养成、加密名人、加密资产等区块链游戏场景'
         	},
         	{
+            id:9,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-27px 749px',
-        		title:'履约保证',
-        		dir:'在满足特定条件时释放加密货币付款。'
+        		imgp:'-74px -2246px',
+        		title:'区块链商城',
+        		dir:'基于超级账本(hyperledger)、以太坊（Ethereum）的区块链技术，打造去中心化电商生态体系，通过打通数字资产与实体商业的价值对接，实现商业服务的区块链转型'
         	},
         	{
+            id:10,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-408px 735px',
-        		title:'众筹',
-        		dir:'允许个人和组织接受全世界对其项目的投入或投资。'
+        		imgp:'-460px -2246px',
+        		title:'数字钱包',
+        		dir:'基于主流链上数据的多币种钱包体系，安全便捷高效的数字资产管理，灵活的商业应用方式助您快速落地数字资产。可独立应用运行，也可集成于传统互联网项目中'
         	},
         	{
+            id:11,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-35px 256px',
-        		title:'训练',
-        		dir:'教您的团队理解区块链技术并为接下来的动作作准备。'
+        		imgp:'-78px -2771px',
+        		title:'交易系统',
+        		dir:'基于区块链技术的多种模式交易系统，包含币币交易、场外OTC交易、场内C2C交易、商城交易、交易即挖矿交易等模式'
         	},
         	{
+            id:12,
         		back:'服务技术',
         		forword:'服务技术',
         		exm:'时代前沿的区块链技术服务内容',
-        		imgp:'-415px 247px',
-        		title:'匿名化',
-        		dir:'使用额外匿名化措施，如混币，以保障隐私。'
+        		imgp:'-456px -2777px',
+        		title:'区块链行情分析',
+        		dir:'基于数据抓取与二次加工清洗形成的区块链大数据行情平台。其数据可应用于区块链行情门户网站、区块链行情快报机器人、区块链资讯媒体网站'
         	},
 
         ],

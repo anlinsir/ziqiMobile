@@ -94,7 +94,7 @@ html,body{
   font-weight: 400;
 }
 .img{
-  background-image: url('/static/img/M_server.png');
+  background-image: url('/mob/img/M_server.png');
 }
 .box{
   border-radius: 50%;
